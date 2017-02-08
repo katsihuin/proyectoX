@@ -13,7 +13,7 @@
 	  	<link href="css/main.css" rel="stylesheet">
 	  	<link href="css/queries.css" rel="stylesheet">
 	</head>
-	<body>
+	<body onload="init()">
 	  	<div class="w-app">
 	  		<div class="container">
 	  			<aside class="col-md-4 w-contacts">
@@ -30,11 +30,11 @@
 	  				<div class="w-search icon-search">
 	  					<input type="text" placeholder="Buscar o empezar un chat nuevo" class="w-search-contacts">
 	  				</div>
-	  				<ul class="w-recent-chats" id="chat-list">	 					
+	  				<ul class="w-recent-chats" id="lista-chats">
 	  				</ul>
 	  			</aside>
 	  			<section class="col-md-8 w-contacts w-messages">
-	  				<header class="w-chat-messages clearfix">
+	  				<header id="chat-header" class="w-chat-messages clearfix">
 	  					<div class="avatar col-xs-9 w-chat-profile">
 	  						<img src="image/logocodeacademy.png" alt="">
 	  						<h4 class="w-contact-name">Laboratoria Perú</h4>
@@ -148,9 +148,7 @@
 	  								<div class="time">14:27</div>
 	  							</div>
 	  						</div>
-	  						<div id="conversacion">
-
-	  						</div>
+	  						
 	  					</div>
 	  				</section>
 
@@ -158,7 +156,7 @@
 	  					<ul class="w-write-message-list clearfix">
 	  						<li class="col-xs-1 w-write-message-item icon-insert_emoticon w-write-message-icon"></li>
 	  						<li class="col-xs-10 w-write-message-item w-write-message-input">
-	  							<input type="text" name="w-message-input" class="w-write-message-field" placeholder="Escribe tu mensaje aquí" id="mensajes">
+	  							<input type="text" onkeyup="onMensajeKey(event);" name="w-message-input"  class="w-write-message-field" placeholder="Escribe tu mensaje aquí" id="mensajes">
 	  						</li>
 	  						<li class="col-xs-1 w-write-message-item icon-mic w-write-message-icon"></li>
 	  					</ul>
@@ -166,6 +164,6 @@
 	  			</section>
 	  		</div>
 	  	</div>
-		<script type="text/javascript" src="js/extra.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
