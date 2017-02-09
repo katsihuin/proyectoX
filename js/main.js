@@ -1,4 +1,5 @@
-//Lógica
+//PARTE LÓGICA
+//funcion constructor de chat individualmente
 function Chat(_nombre, _imagen)
 {
 	this.nombre =  _nombre;
@@ -8,10 +9,11 @@ function Chat(_nombre, _imagen)
 
 	this.borrarMensajes = function()
 	{
-		/*alert("borrado");*/
+
 	};
 }
 
+//Instancia los chats en arreglo
 var infoListChats = [
 	new Chat("Lichy", 'image/lichy.jpg'),
 	new Chat("Roxsy", 'image/roxy.jpg'),
@@ -27,15 +29,20 @@ var infoListChats = [
 ];
 
 
-//Parte visual
+//PARTE VISUAL
+//variable global
 var liListItem = null;
 
-function initiala() {
+//Inicializa la página web
+function init() {
 
-	initialaChatList();
+	initChatList();
 }
 
-function initialaChatList() {
+//Crea e inicia toda la lista chats
+function initChatList() 
+{
+	//Obtén contenedor ul de los chats
 	var listChatsLi = document.getElementById("list-chats");
 
 	for (var i in infoListChats) {
@@ -52,6 +59,7 @@ function initialaChatList() {
 	eventsSetChatList();
 }
 
+//Actualiza los eventos de los chats
 function eventsSetChatList() {
 	var listadoChats = document.getElementById('list-chats');
 	var arrayListItems = listadoChats.getElementsByTagName('li');
@@ -65,13 +73,15 @@ function eventsSetChatList() {
 }
 
 function clickOnChatItem(evt) {
-	//console.log(evt.currentTarget);
-	var contactName = evt.currentTarget.getElementsByClassName('w-contact-name')[0].textContent;
-	var imgURL = evt.currentTarget.getElementsByClassName('wh-44')[0].src;
+	//event.currentTarget: Siempre se refiere al elemento del event Handler (Manejador de Eventos) que ha sido atachado a un event.target especifico, 
+	//este identifica el elemento en el que se produjo el evento.  Devuelve el elemento del DOM que está disparando el evento actualmente
+	var contactName = evt.currentTarget.getElementsByClassName('w-contact-name')[0].textContent; //acesso al contenido del h4, nombre del perfil
+	var imgURL = evt.currentTarget.getElementsByClassName('wh-44')[0].src;//acesso al avatar
 	console.log('click');
 	headerChatDinamic(contactName, imgURL, "Conectado");
 }
 
+//Manda mensajes cada vez uqe presiones la tecla enten
 function onMensajeKey(evt) {
 	if (evt.keyCode == 13) {
 		var inputMessages = document.getElementById("mensajes");
@@ -83,7 +93,10 @@ function onMensajeKey(evt) {
 	}
 }
 
+//Crea un mensaje
 function createMessage(_mensaje) {
+
+	//mensajes que recibes
 	var htmlMensajeIn = '<div class="w-message w-message-in">' +
 		'<div class="w-message-text">' +
 		'<h5 class="green-1">Maria Paula Rivarola</h5>' +
@@ -93,6 +106,8 @@ function createMessage(_mensaje) {
 		'</div>';
 
 	var d = new Date();
+
+	//mensajes que envias
 	var htmlMensajeOut = '<div class="w-message w-message-out">' +
 		'<div class="w-message-text">' +
 		'<p>' + _mensaje + '</p>' +
@@ -106,12 +121,12 @@ function createMessage(_mensaje) {
 	console.log();
 
 
-	var elChat = document.getElementById("chat");
+	var elChat = document.getElementById("chat"); //agrega los mensajes al arreglo
 	elChat.innerHTML += htmlMensajeOut;
 	elChat.scrollTop = elChat.scrollHeight;
 }
 
-
+//Crea chats
 function createChat(_mensaje) {
 	var listChatsLi = document.getElementById("list-chats");
 
@@ -128,10 +143,11 @@ function createChat(_mensaje) {
 
 		listChatsLi.insertBefore(liListItem, listChatsLi.childNodes[0]);
 	}
-	eventsSetChatList();
+	eventsSetChatList(); //Actualiza los eventos de la lista de chats
 	//listChatsLi.innerHTML += htmlChatItem;
 }
 
+//Recibe como parametro la infomarcion dl perfil de chat y actualiza la cabecera
 function headerChatDinamic(_contactName, _imageURL, _estado) {
 	var chatHeader = document.getElementById("chat-header");
 	chatHeader.getElementsByClassName('w-contact-name')[0].innerHTML = _contactName;
@@ -139,17 +155,20 @@ function headerChatDinamic(_contactName, _imageURL, _estado) {
 	chatHeader.getElementsByTagName('img')[0].src = _imageURL;
 }
 
+
+//Busca en la lista de contactos algun chat
 var search = document.getElementById("search"),
     food = document.getElementsByClassName("avatar"),
     forEach = Array.prototype.forEach;
 
-search.addEventListener("keyup", function(e){
-    var choice = this.value;
-  
-    forEach.call(food, function(f){
-        if (f.innerHTML.toLowerCase().search(choice.toLowerCase()) == -1)
-            f.parentNode.style.display = "none";        
-        else
-            f.parentNode.style.display = "block";        
+	search.addEventListener("keyup", function(e)
+	{
+	    var choice = this.value;
+	  
+	    forEach.call(food, function(f){
+	        if (f.innerHTML.toLowerCase().search(choice.toLowerCase()) == -1)
+	            f.parentNode.style.display = "none";        
+	        else
+	            f.parentNode.style.display = "block";        
     });
 }, false)
