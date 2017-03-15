@@ -13,7 +13,7 @@
 	  	<link href="css/main.css" rel="stylesheet">
 	  	<link href="css/queries.css" rel="stylesheet">
 	</head>
-	<body onload="init()">
+	<body>
 	  	<div class="w-app">
 	  		<div class="container">
 	  			<aside class="col-md-4 w-contacts">
@@ -166,5 +166,22 @@
 	  		</div>
 	  	</div>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="" src="http://services.geekadvice.pe:4000/socket.io/socket.io.js"></script>
+<script>
+           
+           var socket ;
+           
+           window.onload = function(){
+               socket = io.connect('http://services.geekadvice.pe:4000');
+           
+    
+            socket.emit('identify', 'katherin');
+            socket.on('list-users', function(_users){
+                console.log(_users); 
+            });
+            };    
+            
+           
+       </script>
 	</body>
 </html>
